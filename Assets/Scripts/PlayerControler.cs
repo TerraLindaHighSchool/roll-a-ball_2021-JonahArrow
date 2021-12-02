@@ -8,13 +8,17 @@ public class PlayerControler : MonoBehaviour
     public float speed = 0;
 
     private Rigidbody rb;
+    private SphereCollider cl;
     private float movementX;
     private float movementY;
+    private bool isOnGround = false;
+    [SerializeField] private float jumpForce = 400;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        cl = GetComponent<SphereCollider>();
     }
 
     private void OnMove(InputValue movementValue)
@@ -30,5 +34,18 @@ public class PlayerControler : MonoBehaviour
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
 
         rb.AddForce(movement * speed);
+    }
+
+    private void OnJump()
+    {
+        if(isOnGround)
+        {
+            rb.AddForce(new Vector3(0, jumpForce, 0));
+        }
+    }
+
+    private void GroundCheck()
+    {
+        
     }
 }
