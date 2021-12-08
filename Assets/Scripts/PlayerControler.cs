@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,7 +9,7 @@ public class PlayerControler : MonoBehaviour
 <<<<<<< HEAD
     private float movementX;
     private float movementY;
-    private bool isOnGround = false;
+    private bool isOnGround = true;
     [SerializeField] private float jumpForce = 400;
 =======
 >>>>>>> 0504f153e8ace0c3c07bb9d158c377c358b659e5
@@ -22,11 +21,14 @@ public class PlayerControler : MonoBehaviour
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private void Update()
     {
         
     }
 
+=======
+>>>>>>> parent of 8e143ce (brye)
     private void OnMove(InputValue movementValue)
 =======
     private void OnAnimatorMove(InputValue movementValue)
@@ -40,24 +42,11 @@ public class PlayerControler : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("PickUp"))
-        {
-            other.gameObject.SetActive(false);
-        }
-        if (other.gameObject.CompareTag("Jumpable"))
-        {
-            isOnGround = true;
-        }
-    }
-
     private void OnJump()
     {
         if(isOnGround)
         {
             rb.AddForce(new Vector3(0, jumpForce, 0));
-            isOnGround = false;
         }
     }
 }
