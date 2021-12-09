@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,7 +11,7 @@ public class PlayerControler : MonoBehaviour
     private Rigidbody rb;
     private float movementX;
     private float movementY;
-    private bool isOnGround = true;
+    private bool isOnGround = false;
     [SerializeField] private float jumpForce = 400;
 
     // Start is called before the first frame update
@@ -20,13 +21,19 @@ public class PlayerControler : MonoBehaviour
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of d0addb8 (bruh)
     private void Update()
     {
         
     }
 
+<<<<<<< HEAD
 >>>>>>> parent of e5379e2 (a)
+=======
+>>>>>>> parent of d0addb8 (bruh)
     private void OnMove(InputValue movementValue)
     {
         Vector2 movementVector = movementValue.Get<Vector2>();
@@ -48,11 +55,24 @@ public class PlayerControler : MonoBehaviour
         rb.AddForce(movement * speed);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("PickUp"))
+        {
+            other.gameObject.SetActive(false);
+        }
+        if (other.gameObject.CompareTag("Jumpable"))
+        {
+            isOnGround = true;
+        }
+    }
+
     private void OnJump()
     {
         if(isOnGround)
         {
             rb.AddForce(new Vector3(0, jumpForce, 0));
+            isOnGround = false;
         }
     }
 }
