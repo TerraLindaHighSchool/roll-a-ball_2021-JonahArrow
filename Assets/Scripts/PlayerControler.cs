@@ -19,6 +19,14 @@ public class PlayerControler : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+<<<<<<< HEAD
+=======
+    private void Update()
+    {
+        
+    }
+
+>>>>>>> parent of e5379e2 (a)
     private void OnMove(InputValue movementValue)
     {
         Vector2 movementVector = movementValue.Get<Vector2>();
@@ -30,6 +38,12 @@ public class PlayerControler : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+<<<<<<< HEAD
+=======
+
+        rb.AddForce(movement * speed);
+    }
+>>>>>>> parent of e5379e2 (a)
 
         rb.AddForce(movement * speed);
     }
