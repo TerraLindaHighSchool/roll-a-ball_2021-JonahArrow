@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PickUp
   - Jumpable
+  - DoubleJumpable
   layers:
   - Default
   - TransparentFX

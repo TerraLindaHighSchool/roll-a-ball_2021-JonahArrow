@@ -10,7 +10,9 @@ public class PlayerControler : MonoBehaviour
     public float speed = 0;
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
+    public bool respawnDoubles = false;
 
+    private float ticks = 0;
     private Rigidbody rb;
     private int count;
     private float movementX;
@@ -30,7 +32,7 @@ public class PlayerControler : MonoBehaviour
 
     private void Update()
     {
-        
+        ticks++;
     }
     private void OnMove(InputValue movementValue)
     {
@@ -38,6 +40,14 @@ public class PlayerControler : MonoBehaviour
 
         movementX = movementVector.x;
         movementY = movementVector.y;
+    }
+
+    private void TickCheck()
+    {
+        if(ticks == 100)
+        {
+
+        }
     }
 
     void SetCountText() 
@@ -55,7 +65,7 @@ public class PlayerControler : MonoBehaviour
         rb.AddForce(movement * speed);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("PickUp"))
         {
@@ -67,6 +77,12 @@ public class PlayerControler : MonoBehaviour
         if (other.gameObject.CompareTag("Jumpable"))
         {
             isOnGround = true;
+            respawnDoubles = true;
+        }
+        if (other.gameObject.CompareTag("DoubleJumpable"))
+        {
+            isOnGround = true;
+            ticks = 0;
         }
     }
 
