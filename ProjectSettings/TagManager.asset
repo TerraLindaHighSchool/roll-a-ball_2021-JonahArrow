@@ -7,6 +7,14 @@ TagManager:
   - PickUp
   - Jumpable
   - DoubleJumpable
+  - Death
+  - Person
+  - 1
+  - 2
+  - 3
+  - TriggerText
+  - TriggerTextt
+  - TriggerTexttt
   layers:
   - Default
   - TransparentFX
