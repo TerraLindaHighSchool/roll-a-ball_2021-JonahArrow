@@ -10,14 +10,17 @@ public class PlayerControler : MonoBehaviour
     public float speed = 0;
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
-    public bool respawnDoubles = false;
+    public bool dead = false;
+    public Vector3 position;
 
-    private float ticks = 0;
+    GameObject Player;
+
+
     private Rigidbody rb;
     private int count;
     private float movementX;
     private float movementY;
-    private bool isOnGround = false;
+    [SerializeField] private bool isOnGround = false;
     [SerializeField] private float jumpForce = 400;
 
     // Start is called before the first frame update
@@ -28,12 +31,18 @@ public class PlayerControler : MonoBehaviour
 
         SetCountText();
         winTextObject.SetActive(false);
+        gameObject.tag = "Player";
     }
 
-    private void Update()
+    void Update()
     {
-        ticks++;
+        if(dead)
+        {
+            gameObject.transform.position = new Vector3(0, 1, 0);
+            dead = false;
+        }
     }
+
     private void OnMove(InputValue movementValue)
     {
         Vector2 movementVector = movementValue.Get<Vector2>();
@@ -42,18 +51,10 @@ public class PlayerControler : MonoBehaviour
         movementY = movementVector.y;
     }
 
-    private void TickCheck()
-    {
-        if(ticks == 100)
-        {
-
-        }
-    }
-
-    void SetCountText() 
+    void SetCountText()
     {
         countText.text = "Count:" + count.ToString();
-        if (count >= 12) 
+        if (count >= 12)
         {
             winTextObject.SetActive(true);
         }
@@ -74,21 +75,39 @@ public class PlayerControler : MonoBehaviour
 
             SetCountText();
         }
+        if (other.gameObject.CompareTag("Death"))
+        {
+            dead = true;
+        }
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
         if (other.gameObject.CompareTag("Jumpable"))
         {
             isOnGround = true;
-            respawnDoubles = true;
         }
         if (other.gameObject.CompareTag("DoubleJumpable"))
         {
             isOnGround = true;
-            ticks = 0;
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Jumpable"))
+        {
+            isOnGround = false;
+        }
+        if (other.gameObject.CompareTag("DoubleJumpable"))
+        {
+            isOnGround = false;
         }
     }
 
     private void OnJump()
     {
-        if(isOnGround)
+        if (isOnGround)
         {
             rb.AddForce(new Vector3(0, jumpForce, 0));
             isOnGround = false;
