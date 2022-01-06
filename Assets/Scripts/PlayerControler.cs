@@ -51,6 +51,7 @@ public class PlayerControler : MonoBehaviour
         movementY = movementVector.y;
     }
 
+    // Checks how many collectables collected and if you have collected them all
     void SetCountText()
     {
         countText.text = "Count:" + count.ToString();
@@ -78,6 +79,18 @@ public class PlayerControler : MonoBehaviour
         if (other.gameObject.CompareTag("Death"))
         {
             dead = true;
+        }
+        if (other.gameObject.CompareTag("TriggerText"))
+        {
+            other.gameObject.SetActive(false);
+        }
+        if (other.gameObject.CompareTag("TriggerTextt"))
+        {
+            other.gameObject.SetActive(false);
+        }
+        if (other.gameObject.CompareTag("TriggerTexttt"))
+        {
+            other.gameObject.SetActive(false);
         }
     }
 

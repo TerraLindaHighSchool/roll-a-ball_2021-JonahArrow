@@ -12,6 +12,9 @@ TagManager:
   - 1
   - 2
   - 3
+  - TriggerText
+  - TriggerTextt
+  - TriggerTexttt
   layers:
   - Default
   - TransparentFX
